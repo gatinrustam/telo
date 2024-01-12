@@ -1,0 +1,13 @@
+// Миксин для формирования квадратных сущностей
+
+@use '../abstract/mixins' as *;
+
+.square {
+  @for $i from 4 to 64 {
+    @if $i % 4 == 0 {
+      &-#{$i} {
+        @include rectangle($i + px);
+      }
+    }
+  }
+}

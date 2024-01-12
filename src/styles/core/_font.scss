@@ -1,0 +1,19 @@
+// Подключение шрифтов
+
+@font-face {
+	font-family: 'PPWriter';
+	src: url('../fonts/PPWriter-RegularItalic.woff2') format('woff2'),
+			url('../fonts/PPWriter-RegularItalic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'AnonymousPro';
+	src: url('../fonts/AnonymousPro.woff2') format('woff2'),
+			url('../fonts/AnonymousPro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}

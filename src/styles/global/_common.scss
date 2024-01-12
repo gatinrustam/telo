@@ -1,0 +1,86 @@
+// Вспомогательные классы. Не участвуют в разработке, нужны только для визуала
+
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
+.__indent {
+  &-small {
+    margin-bottom: rtm(6);
+  }
+ 
+  &-medium {
+    margin-bottom: rtm(10);
+  }
+
+  &-large {
+    margin-bottom: rtm(20);
+  }
+}
+
+.__container {
+  &:first-child {
+    margin-top: rtm(20);
+  }
+}
+
+.__wrapper {
+  margin-bottom: rtm(-4);
+  display: flex;
+  flex-wrap: wrap;
+
+  &-item {
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+.__column {
+  background-color: #848484;
+  color: wheat;
+  padding: 12px;
+    border-radius: 12px;
+}
+
+.__accordion {
+  border-bottom: 1px solid gray;
+
+  &:not(.active) {
+    
+    .__accordion-body {
+      display: none;
+    }
+  }
+  &-header {
+    padding: 12px 0;
+  }
+
+  &-title {
+    flex-grow: 1;
+  }
+
+  &-body {
+    transition: 100ms ease-in-out;
+    padding-bottom: 12px;
+  }
+}
+
+.__scroll {
+  &-wrapper {
+    background-color: gray;
+    padding: 20px;
+    overflow-x: auto;
+    display: flex;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &-item {
+    background-color: darkgray;
+    width: 200px;
+    height: 200px;
+    margin-right: 32px;
+    flex-shrink: 0;
+  }
+}
