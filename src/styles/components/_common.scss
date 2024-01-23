@@ -1,23 +1,29 @@
 .container {
   width: 100%;
+  overflow: clip;
 
   &__inner {
     width: 100%;
-    // 1440px
-    max-width: 1392px;
-    margin: auto 24px;
+    max-width: 1440px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin: 0 auto;
   }
 }
 
 .button {
   outline: none;
   font-size: 24px;
-  padding: 20px 48px 24px;
+  padding: 18px 48px 24px;
   border-radius: 12px;
 
   &--black {
     background-color: #000000;
     color: #ffffff;
+
+    &:hover {
+      background-color: #232323;
+    }
   }
 }
 

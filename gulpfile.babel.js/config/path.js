@@ -20,8 +20,8 @@ export default {
         dest: pathDest + '/assets/js/'
     },
     img: {
-        src: pathSrc + '/images/**/*.{png,jpg,jpeg,gif,svg}',
-        watch: pathSrc + '/images/**/*.{png,jpg,jpeg,gif,svg}',
+        src: pathSrc + '/images/**/*.{png,jpg,jpeg,gif,svg,mp4,webm}',
+        watch: pathSrc + '/images/**/*.{png,jpg,jpeg,gif,svg,mp4,webm}',
         dest: pathDest + '/assets/images/'
     },
     font: {

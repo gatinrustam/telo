@@ -1,5 +1,26 @@
 .double {
+  height: 200vh;
+  padding-top: 30vh;
+
   &__list {
     width: 80%;
+  }
+
+  &__columns {
+    display: flex;
+    gap: 24px;
+    height: 100%;
+  }
+
+  &__column {
+    flex: 1;
+    height: 100%;
+    position: relative;
+  }
+
+  &__content {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }

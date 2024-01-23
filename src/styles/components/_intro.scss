@@ -19,6 +19,7 @@
   }
   
   &__heading {
+    font-family: "AnonymousPro", sans-serif;
     // border: 1px solid #777;
   }
 
@@ -34,7 +35,6 @@
     left: 0;
     width: calc(100% + 48px);
     height: 100vh;
-    overflow: clip;
     // border: 1px solid blue;
     margin-left: -24px;
     margin-right: -24px;
@@ -43,10 +43,10 @@
   }
 
   &__flower {
-    width: 50px;
+    width: 100px;
   }
 
-  &__image {
+  &__scrolling {
     position: absolute;
     top: -80%;
     width: 400px;
@@ -54,24 +54,18 @@
     transform-origin: bottom right;
     border-radius: 24px;
     will-change: transform;
+  }
 
-    &--1 {
-      z-index: 6;
-    }
-    &--2 {
-      z-index: 5;
-    }
-    &--3 {
-      z-index: 4;
-    }
-    &--4 {
-      z-index: 3;
-    }
-    &--5 {
-      z-index: 2;
-    }
-    &--6 {
-      z-index: 1;
+  &__video {
+    // background-color: red;
+    overflow: hidden;
+
+    & video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
     }
   }
 }
