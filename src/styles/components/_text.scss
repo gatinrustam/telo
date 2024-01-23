@@ -1,0 +1,22 @@
+.text {
+  padding-top: 40vh;
+  padding-bottom: 40vh;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    margin-bottom: 24px;
+  }
+
+  &__content {
+    width: 55%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

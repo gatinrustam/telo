@@ -1,0 +1,26 @@
+.title {
+  
+  &--hero {
+    font-size: 64px;
+  }
+  
+  &--heading {
+    font-size: 32px;
+    line-height: 1.4em;
+  }
+
+  &--bottom {
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.paragraph {
+  font-size: 24px;
+  line-height: 1.4em;
+
+  &--body-1 { 
+    font-size: 20px;
+  }
+}

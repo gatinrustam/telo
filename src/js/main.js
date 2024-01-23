@@ -1,20 +1,53 @@
 // init path
-const path = anime.path(".path");
+const path = anime.path(".intro__path");
 
 // init observer blocks
-const lineElement = document.querySelector('.path-wrapper');
+const lineElement = document.querySelector('.intro__inner');
 
 // init animation
-const planeAnimation = anime({
-    targets: ".path-target",
+const animationOptions = {
     translateX: path("x"),
     translateY: path("y"),
     rotate: path("angle"),
-    easing: "linear",
     loop: false,
     autoplay: false,
-    duration: 5000,
-});
+    elasticity: 700,
+    duration: 1400,
+    easing: 'easeInOutQuad',
+}
+
+const planeAnimations = [
+    anime({
+        targets: ".intro__image--1",
+        delay: 0,
+        ...animationOptions
+    }),
+    anime({
+        targets: ".intro__image--2",
+        delay: 300,
+        ...animationOptions
+    }),
+    anime({
+        targets: ".intro__image--3",
+        delay: 600,
+        ...animationOptions
+    }),
+    anime({
+        targets: ".intro__image--4",
+        delay: 900,
+        ...animationOptions
+    }),
+    anime({
+        targets: ".intro__image--5",
+        delay: 1200,
+        ...animationOptions
+    }),
+    anime({
+        targets: ".intro__image--6",
+        delay: 1500,
+        ...animationOptions
+    }),
+]
 
 // get scroll position (0 -> 1)
 const getScrollPosition = (block) => {
@@ -25,7 +58,7 @@ const getScrollPosition = (block) => {
     let x = (innerHeight / 2 - top) / (height / 1);
     let y = Math.max(0, Math.min(x, 1));
 
-    return y;
+    return y * 0.9;
 };
 
 
@@ -34,7 +67,7 @@ const questionsElement = document.querySelector('.questions');
 
 const elements = [
   {
-      block: document.querySelector(".first"),
+      block: document.querySelector(".double"),
       startColor: [255, 255, 255],
       endColor: [169, 176, 183],
   },
@@ -111,11 +144,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // follow line
-        const roadElementPosition = getScrollPosition(lineElement);
+        let roadElementPosition = getScrollPosition(lineElement);
+
+        console.log(roadElementPosition);
+
+        // roadElementPosition = roadElementPosition > 0.7 ? 0.7 : roadElementPosition
     
-        let seek = roadElementPosition * planeAnimation.duration;
-        seek = Number(seek.toFixed());
-        planeAnimation.seek(seek);
+        for (let i = 0; i < planeAnimations.length; i++) {
+            let seek = roadElementPosition * planeAnimations[i].duration;
+            seek = Number(seek.toFixed());
+            planeAnimations[i].seek(seek);
+        }
     };
 
     window.addEventListener("scroll", () => {

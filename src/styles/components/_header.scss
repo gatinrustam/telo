@@ -9,22 +9,22 @@
     padding: 24px;
   }
 
-  &__bg {
-    width: 210px;
-    height: 85px;
-    background-color: rgba(255, 255, 255, 0.2);
-    position: absolute;
-    top: 0;
-    left: 0;
-    filter: blur(10px);
-    border-radius: 100px;
-    z-index: 1;
-  }
+  // &__bg {
+  //   width: 210px;
+  //   height: 85px;
+  //   background-color: rgba(255, 255, 255, 0.2);
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   filter: blur(10px);
+  //   border-radius: 100px;
+  //   z-index: 1;
+  // }
 
   &__logo {
-    width: 160px;
-    height: 40px;
-    background-image: url('../images/logo.svg');
+    width: 251px;
+    height: 85.3px;
+    background-image: url('../images/main-logo.svg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -44,6 +44,10 @@
 
 .zero {
   height: 100vh;
+}
+
+.main {
+  width: 100vw;
 }
 
 .second,
@@ -83,14 +87,22 @@
   left: 0;
   z-index: 2;
   
+  &__heading {
+    background-color: rgba(255, 255, 255, 0.2);
+    // backdrop-filter: blur(20px);
+    padding: 16px 36px 36px;
+    border-radius: 36px;
+  }
+  
   &--left {
     top: 100px;
     padding-top: 100px;
-    padding-left: 50%;
+    padding-left: 60%;
   }
 
   &--right {
-    top: 100px;
+    top: 50%;
+    transform: translateY(-50%);
     padding-right: 50%;
   }
 
@@ -101,46 +113,37 @@
 
   &__text {
     font-size: 24px;
-    width: 80%;
   }
 }
 
 .path-wrapper {
   position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1;
 
   & svg {
     width: 100%;
   }
-}
-
-.path-target {
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 150px;
-  border: 1px solid #000000;
-}
-
-.text {
-  max-width: 1440px;
-  margin: 100px auto 0;
-  padding: 30vh 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   & img {
-    margin-bottom: 24px;
-  }
-
-  &__text {
-    font-size: 36px;
-    width: 60%;
-    text-align: center;
+    border-radius: 24px;
   }
 }
+
+.path-image {
+  width: 650px;
+  position: absolute;
+  bottom: 0;
+  border: 1px solid red;
+  transform-origin: bottom right;
+  
+  & img {
+    width: 100%;
+  }
+}
+
 
 .girl {
   position: absolute;
