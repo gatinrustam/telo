@@ -3,6 +3,10 @@
   &--hero {
     font-size: 64px;
   }
+
+  &--hero-2 {
+    font-size: 56px;
+  }
   
   &--heading {
     font-size: 32px;
@@ -14,6 +18,10 @@
       margin-bottom: 24px;
     }
   }
+
+  &--white {
+    color: #ffffff;
+  }
 }
 
 .paragraph {
@@ -23,4 +31,16 @@
   &--body-1 { 
     font-size: 20px;
   }
+
+  &--white {
+    color: #ffffff;
+  }
+}
+
+.italic {
+	font-family: 'PPWriter';
+}
+
+.mono {
+	font-family: 'AnonymousPro';
 }

@@ -1,3 +1,6 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
 .intro {
   position: relative;
 
@@ -9,9 +12,14 @@
   &__text {
     position: sticky;
     top: 100%;
-    padding-left: 50vw;
+    padding-left: 16px;
+    padding-right: 16px;
     z-index: 10;
     transform: translateY(calc(-100% - 50px));
+    
+    @include media(md) {
+      padding-left: 50vw;
+    }
   }
 
   &__title {
@@ -27,6 +35,7 @@
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
+    width: 100%;
   }
 
   &__images {
@@ -35,7 +44,7 @@
     left: 0;
     width: calc(100% + 48px);
     height: 100vh;
-    // border: 1px solid blue;
+    resize: both;
     margin-left: -24px;
     margin-right: -24px;
     // background: #e5ebf1;
@@ -48,12 +57,19 @@
 
   &__scrolling {
     position: absolute;
-    top: -80%;
-    width: 400px;
-    height: 600px;
-    transform-origin: bottom right;
-    border-radius: 24px;
+    top: -50%;
+    width: 250px;
+    height: 375px;
+    border-radius: 16px;
     will-change: transform;
+    
+    @include media(md) {
+      transform-origin: bottom right;
+      top: -80%;
+      width: 400px;
+      height: 600px;
+      border-radius: 24px;
+    }
   }
 
   &__video {

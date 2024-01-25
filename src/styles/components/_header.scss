@@ -1,3 +1,6 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
 .header {
   position: fixed;
   top: 0;
@@ -10,19 +13,30 @@
     padding: 24px;
     position: relative;
     display: flex;
-    align-items: center;
-    gap: 64px;
+    flex-direction: column;
+    gap: 16px;
+    
+    @include media(md) {
+      gap: 64px;
+      align-items: center;
+      flex-direction: row;
+    }
   }
 
   &__logo {
-    width: 251px;
-    height: 85.3px;
-    background-image: url('../images/main-logo.svg');
+    width: 170px;
+    height: 58px;
+    background-image: url('../images/main-logo3.svg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
     z-index: 2;
+
+    @include media(md) {
+      width: 251px;
+      height: 85.3px;
+    }
   }
 
   &__menu {

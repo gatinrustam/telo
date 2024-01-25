@@ -2,8 +2,10 @@ const scrollingContainer = document.querySelector('.intro');
 const scrollingPath = anime.path(".intro__path");
 const scrollingElements = document.querySelectorAll('.intro__scrolling');
 
+// set zIndex
 scrollingElements.forEach((element, i, arr) => element.style.zIndex = arr.length - i)
 
+// init animation
 const planeAnimations = anime({
     targets: Array.from(scrollingElements),
     translateX: scrollingPath("x"),
@@ -14,34 +16,32 @@ const planeAnimations = anime({
     elasticity: 700,
     duration: 1400,
     easing: 'easeInOutQuad',
-    delay: (_, i) => i * 150
+    delay: anime.stagger(130),
+    // delay: (_, i) => i * 150
 })
 
-// get scroll position (0 -> 1)
+// calc scroll position
 const getScrollPosition = (block) => {
     const { innerHeight } = window;
     const { top, height } = block.getBoundingClientRect();
 
-
-    let x = (innerHeight / 2 - top) / (height / 1);
+    let x = (innerHeight / 2 - top) / height;
     let y = Math.max(0, Math.min(x, 1));
 
-    return y * 0.9;
+    return y;
 };
-
-
 
 const questionsElement = document.querySelector('.questions');
 
 const elements = [
   {
-      block: document.querySelector(".double"),
+      block: document.querySelector(".gray-bg"),
       startColor: [255, 255, 255],
-      endColor: [169, 176, 183],
+      endColor: [149, 166, 178],
   },
   {
-      block: document.querySelector(".second"),
-      startColor: [169, 176, 183],
+      block: document.querySelector(".black-bg"),
+      startColor: [149, 166, 178],
       endColor: [0, 0, 0],
       blur: true
   },
@@ -51,6 +51,21 @@ const elements = [
       endColor: [255, 255, 255],
   }
 ];
+
+// const doubleItems = document.querySelectorAll('.double-item')
+// const doubleContainer = document.querySelector(".double")
+
+// function switchTextByScroll(){
+//     const scrollStep = getScrollPosition(doubleContainer)
+
+//     const step = Math.round(scrollStep * doubleItems.length);
+
+//     if (doubleItems[step] === undefined) {
+//         return
+//     }
+
+//     doubleItems[step].classList.toggle('active')
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -123,6 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // for (let i = 0; i < planeAnimations.length; i++) {
         // }
+
+        switchTextByScroll()
     };
 
     window.addEventListener("scroll", () => {
