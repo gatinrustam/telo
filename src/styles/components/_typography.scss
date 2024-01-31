@@ -1,3 +1,6 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
 .title {
   
   &--hero {
@@ -5,12 +8,43 @@
   }
 
   &--hero-2 {
-    font-size: 56px;
+    font-size: 32px;
+    font-weight: 500;
+
+    @include media(lg) {
+      font-size: 48px;
+    }
+
+    @include media(xxxl) {
+      font-size: 56px;
+    }
   }
   
-  &--heading {
-    font-size: 32px;
+  &--heading-1 {
+    font-size: 20px;
     line-height: 1.4em;
+    
+    @include media(sm) {
+      font-size: 24px;
+    }
+
+    @include media(md) {
+      font-size: 32px;
+    }
+  }
+
+  &--heading-2 {
+    font-size: 16px;
+    line-height: 1.4em;
+    font-weight: 400;
+    
+    @include media(md) {
+      font-size: 18px;
+    }
+
+    @include media(xl) {
+      font-size: 32px;
+    }
   }
 
   &--bottom {
@@ -25,8 +59,12 @@
 }
 
 .paragraph {
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1.4em;
+  
+  @include media(lg) {
+    font-size: 24px;
+  }
 
   &--body-1 { 
     font-size: 20px;

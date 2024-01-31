@@ -1,3 +1,11 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
+.main {
+  position: relative;
+  z-index: 4;
+}
+
 .container {
   width: 100%;
   overflow: clip;
@@ -5,21 +13,53 @@
   &__inner {
     width: 100%;
     max-width: 1440px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
     margin: 0 auto;
+
+    @include media(md) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @include media(xl) {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
   }
+}
+
+.button-wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .button {
   outline: none;
-  font-size: 24px;
-  padding: 18px 48px 24px;
+  font-size: 18px;
+  padding: 10px 32px 12px;
   border-radius: 12px;
+  width: 100%;
+  
+  @include media(lg) {
+    width: initial;
+    font-size: 20px;
+    padding: 18px 48px 20px;
+  }
 
   &--black {
-    background-color: #000000;
+    background-color: var(--black-bg-button);
     color: #ffffff;
+
+    &:hover {
+      background-color: #232323;
+    }
+  }
+
+  &--white {
+    background-color: #ffffff;
+    color: #242424;
 
     &:hover {
       background-color: #232323;

@@ -1,6 +1,14 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
 .text {
-  padding-top: 40vh;
-  padding-bottom: 40vh;
+  padding-top: 30vh;
+  padding-bottom: 30vh;
+  
+  @include media(md) {
+    padding-top: 40vh;
+    padding-bottom: 40vh;
+  }
 
   &__inner {
     display: flex;
@@ -13,17 +21,24 @@
   }
 
   &__svg {
-    width: 250px;
+    width: 150px;
     height: 100%;
     margin-bottom: 24px;
+    
+    @include media(md) {
+      width: 250px;
+    }
   }
 
   &__content {
-    width: 55%;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: "AnonymousPro", sans-serif;
+
+    @include media(md) {
+      width: 55%;
+    }
   }
 }

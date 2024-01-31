@@ -2,6 +2,9 @@ const scrollingContainer = document.querySelector('.intro');
 const scrollingPath = anime.path(".intro__path");
 const scrollingElements = document.querySelectorAll('.intro__scrolling');
 
+
+const header = document.querySelector('.header')
+
 // set zIndex
 scrollingElements.forEach((element, i, arr) => element.style.zIndex = arr.length - i)
 
@@ -16,8 +19,7 @@ const planeAnimations = anime({
     elasticity: 700,
     duration: 1400,
     easing: 'easeInOutQuad',
-    delay: anime.stagger(130),
-    // delay: (_, i) => i * 150
+    delay: anime.stagger(130)
 })
 
 // calc scroll position
@@ -36,125 +38,99 @@ const questionsElement = document.querySelector('.questions');
 const elements = [
   {
       block: document.querySelector(".gray-bg"),
-      startColor: [255, 255, 255],
-      endColor: [149, 166, 178],
+      bgStartColor: [255, 255, 255],
+      bgEndColor: [149, 166, 178],
   },
   {
       block: document.querySelector(".black-bg"),
-      startColor: [149, 166, 178],
-      endColor: [0, 0, 0],
-      blur: true
+      bgStartColor: [149, 166, 178],
+      bgEndColor: [0, 0, 0]
   },
   {
       block: document.querySelector(".third"),
-      startColor: [0, 0, 0],
-      endColor: [255, 255, 255],
+      bgStartColor: [0, 0, 0],
+      bgEndColor: [255, 255, 255],
   }
 ];
 
-// const doubleItems = document.querySelectorAll('.double-item')
-// const doubleContainer = document.querySelector(".double")
+const getScrollStep = (block) => {
+    const { innerHeight } = window;
+    const { top } = block.getBoundingClientRect();
+    const x = (innerHeight - top) / (innerHeight);
+    const y = Math.max(0, Math.min(x, 1));
 
-// function switchTextByScroll(){
-//     const scrollStep = getScrollPosition(doubleContainer)
+    return y * 100;
+};
+// background color interpolation
+const calcColor = (from, to, scroll) => {
+    const [fromR, fromG, fromB] = from;
+    const [toR, toG, toB] = to;
 
-//     const step = Math.round(scrollStep * doubleItems.length);
+    const r = fromR + Math.round(((toR - fromR) * scroll) / 100);
+    const g = fromG + Math.round(((toG - fromG) * scroll) / 100);
+    const b = fromB + Math.round(((toB - fromB) * scroll) / 100);
+    return [r, g, b];
+};
 
-//     if (doubleItems[step] === undefined) {
-//         return
-//     }
-
-//     doubleItems[step].classList.toggle('active')
-// }
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const getScrollStep = (block) => {
-        const { innerHeight } = window;
-        const { top } = block.getBoundingClientRect();
-        const x = (innerHeight - top) / (innerHeight);
-        const y = Math.max(0, Math.min(x, 1));
-
-        return y * 100;
-    };
-
-    // background color interpolation
-    const calcColor = (from, to, scroll) => {
-        const [fromR, fromG, fromB] = from;
-        const [toR, toG, toB] = to;
-        const r = fromR + Math.round(((toR - fromR) * scroll) / 100);
-        const g = fromG + Math.round(((toG - fromG) * scroll) / 100);
-        const b = fromB + Math.round(((toB - fromB) * scroll) / 100);
-        return [r, g, b];
-    };
-    // not used
-    const setBackgroundColor = (r, g, b) => {
-        document.body.style.background = `rgb(${r}, ${g}, ${b})`;
-    };
-
-    const lazyImages = document.querySelectorAll('.mens')
-
-    const callback = (entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('blur')
-            } else {
-                entry.target.classList.remove('blur')
-            }
-        })
-    }
-
-    const options = {
-        rootMargin: '0px 0px 0px 0px',
-        threshold: 1.0,
-    }
-
-    const observer = new IntersectionObserver(callback, options)
-
-    lazyImages.forEach((image) => observer.observe(image))
+// not used
+const setRootColor = (r, g, b) => {
+    document.body.style.setProperty('--main-bg-color', `rgb(${r}, ${g}, ${b})`)
+};
 
 
-    const onScroll = () => {
-      // color bg
-        elements.forEach((element) => {
-            const position = getScrollStep(element.block);
 
-            if (position > 1) {
-              const colorSet = calcColor(element.startColor, element.endColor, position);
-              setBackgroundColor(...colorSet);
-            }
-        });
+const onScroll = () => {
+    // color bg
+    elements.forEach((element) => {
+        const position = getScrollStep(element.block);
 
-
-        // follow line
-        let roadElementPosition = getScrollPosition(scrollingContainer);
-
-        console.log(roadElementPosition);
-
-        let seek = roadElementPosition * planeAnimations.duration;
-        seek = Number(seek.toFixed());
-        planeAnimations.seek(seek);
-        // roadElementPosition = roadElementPosition > 0.7 ? 0.7 : roadElementPosition
-    
-        // for (let i = 0; i < planeAnimations.length; i++) {
-        // }
-
-        switchTextByScroll()
-    };
-
-    window.addEventListener("scroll", () => {
-        let ticking = false;
-        if (!ticking) {
-            window.requestAnimationFrame(function () {
-                onScroll();
-                ticking = false;
-            });
-            ticking = true;
+        if (position > 1) {
+            const colorSet = calcColor(element.bgStartColor, element.bgEndColor, position);
+            setRootColor(...colorSet);
         }
     });
-    onScroll();
 
-    window.addEventListener('resize', () => {
-        onScroll()
-    })
+
+    // follow line
+    const roadElementPosition = getScrollPosition(scrollingContainer);
+    let seek = roadElementPosition * planeAnimations.duration;
+
+    seek = Number(seek.toFixed());
+    planeAnimations.seek(seek);
+};
+
+window.addEventListener("scroll", () => {
+    let ticking = false;
+    if (!ticking) {
+        window.requestAnimationFrame(function () {
+            onScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
 });
+onScroll();
+
+window.addEventListener('resize', () => {
+    onScroll()
+})
+
+
+
+// observer to switch header theme
+const switchHeaderContainers = document.querySelectorAll('.dark')
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+          header.classList.add('header--white')
+      } else {
+          header.classList.remove('header--white')
+      }
+    })
+  }, {
+    rootMargin: '0px 0px 75px 0px',
+    threshold: 0,
+})
+
+switchHeaderContainers.forEach((item) => observer.observe(item))

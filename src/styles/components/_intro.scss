@@ -3,32 +3,54 @@
 
 .intro {
   position: relative;
-
+  // border: 1px solid green;
+  
   &__inner {
+    // border: 1px solid red;
     position: relative;
-    height: 300vh;
+    height: 200vh;
+
+    @include media(md) {
+      height: 300vh;
+    }
   }
 
   &__text {
     position: sticky;
     top: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-    z-index: 10;
-    transform: translateY(calc(-100% - 50px));
+    z-index: 12;
+    transform: translateY(calc(-100% - 16px));
+    background-color: rgba(255 255 255 / 20%);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    border-radius: 12px;
+
+    @include media(sm) {
+      max-width: 400px;
+      margin-left: 50vw;
+    }
     
-    @include media(md) {
-      padding-left: 50vw;
+    @include media(lg) {
+      max-width: initial;
+      background-color: initial;
+      backdrop-filter: initial;
+      padding: initial;
+      border-radius: initial;
+    }
+    
+    @include media(xl) {
+      position: sticky;
+      top: 100%;
+      transform: translateY(calc(-100% - 50px));
     }
   }
 
   &__title {
-    margin-bottom: 48px;
-  }
-  
-  &__heading {
-    font-family: "AnonymousPro", sans-serif;
-    // border: 1px solid #777;
+    margin-bottom: 24px;
+    
+    @include media(xl) {
+      margin-bottom: 48px;
+    }
   }
 
   &__svg {
@@ -42,13 +64,15 @@
     position: sticky;
     top: 0;
     left: 0;
-    width: calc(100% + 48px);
     height: 100vh;
     resize: both;
-    margin-left: -24px;
-    margin-right: -24px;
-    // background: #e5ebf1;
-    // border-radius: 24px;
+    z-index: 0;
+
+    @include media(xl) {
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      margin-right: -24px;
+    }
   }
 
   &__flower {
@@ -57,17 +81,31 @@
 
   &__scrolling {
     position: absolute;
-    top: -50%;
-    width: 250px;
-    height: 375px;
-    border-radius: 16px;
+    top: -20vh;
+    width: 200px;
+    height: 300px;
+    border-radius: 12px;
     will-change: transform;
+    transform-origin: bottom right;
     
     @include media(md) {
-      transform-origin: bottom right;
-      top: -80%;
+      top: 0vh;
+      width: 250px;
+      height: 375px;
+    }
+    
+    @include media(xl) {
+      border-radius: 16px;
+      top: -60vh;
       width: 400px;
       height: 600px;
+      border-radius: 24px;
+    }
+    
+    @include media(xxxl) {
+      top: -80vh;
+      width: 600px;
+      height: 900px;
       border-radius: 24px;
     }
   }
@@ -84,4 +122,17 @@
       width: 100%;
     }
   }
+
+  // &__bg {
+  //   height: 100px;
+  //   width: calc(100% + 16px);
+  //   position: sticky;
+  //   bottom: 0;
+  //   left: 0;
+  //   margin-left: -8px;
+  //   margin-right: -8px;
+  //   backdrop-filter: blur(10px);
+  //   -webkit-mask: linear-gradient(180deg, rgba(255, 255, 255, 0), black 50%);
+  //   z-index: 15;
+  // }
 }

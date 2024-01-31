@@ -1,0 +1,23 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__row {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__item {
+    border-radius: 8px;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  &__image {
+    width: 100%;
+  }
+}

@@ -1,82 +1,69 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/functions' as *;
+
 .double {
-  height: 200vh;
-  padding-top: 30vh;
+  padding-top: 20vh;
 
   &__list {
     width: 80%;
+    margin-bottom: 48px;
+    padding-left: 0;
+  }
+
+  &__item {
+    list-style: none;
   }
 
   &__columns {
     display: flex;
     gap: 24px;
-    height: 100%;
+    flex-direction: column;
+    
+    @include media(xl) {
+      flex-direction: row;
+    }
 
     &--revert {
-      flex-direction: row-reverse;
+      @include media(xl) {
+        flex-direction: row-reverse;
+      }
     }
   }
 
   &__column {
     flex: 1;
-    height: 100%;
     position: relative;
   }
 
   &__content {
-    position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
+    @include media(xl) {
+      position: sticky;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 
-  &__grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
+  &__sale {
+    color: #ffffff;
+    font-size: 32px;
+    margin-top: -0.25em;
+    background: linear-gradient(
+      90deg, 
+      rgba(255 255 255 / 50%) 1%,
+      rgba(149 166 178 / 100%) 20%, 
+      rgba(255 255 255 / 100%) 35%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 1.5s linear infinite;
 
-    &-item {
-      width: 30%;
-      background-color: red;
-      border-radius: 24px;
+    @keyframes shine {
+      from {
+        background-position: 200% center;
+      }
     }
   }
 }
-
-.grid-container {
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-  gap: 16px; 
-  grid-template-areas: 
-    "div1 div1 div3"
-    "div1 div1 div3"
-    "div5 div6 div4"
-    "div5 div6 div4"
-    "div7 div6 div4"
-    "div7 div8 div8"
-    "div7 div8 div8"
-    "div10 div9 div2"
-    "div10 div9 div2"
-    "div12 div9 div13"
-    "div12 div11 div13"
-    "div12 div11 div13"; 
-  height: 100%;
-}
-.div {
-  background-color: #77858f;
-  border-radius: 8px;
-  background-size: cover;
-}
-.div3 { grid-area: div3; background-image: url('../images/masonry/mas-01.jpg');}
-.div4 { grid-area: div4; background-image: url('../images/masonry/mas-02.jpg');}
-.div5 { grid-area: div5; background-image: url('../images/masonry/mas-03.jpg');}
-.div7 { grid-area: div7; background-image: url('../images/masonry/mas-04.jpg'); }
-.div10 { grid-area: div10; background-image: url('../images/masonry/mas-01.jpg'); }
-.div1 { grid-area: div1; background-image: url('../images/masonry/mas-06.jpg'); }
-.div6 { grid-area: div6; background-image: url('../images/masonry/mas-03.jpg'); }
-.div8 { grid-area: div8; background-image: url('../images/masonry/mas-05.jpg'); }
-.div9 { grid-area: div9; background-image: url('../images/masonry/mas-02.jpg'); }
-.div2 { grid-area: div2; background-image: url('../images/masonry/mas-04.jpg'); }
-.div11 { grid-area: div11; background-image: url('../images/masonry/mas-05.jpg'); }
-.div12 { grid-area: div12; background-image: url('../images/masonry/mas-06.jpg'); }
-.div13 { grid-area: div13; background-image: url('../images/masonry/mas-01.jpg'); }

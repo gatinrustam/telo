@@ -1,1 +1,136 @@
-const scrollingContainer=document.querySelector(".intro"),scrollingPath=anime.path(".intro__path"),scrollingElements=document.querySelectorAll(".intro__scrolling"),planeAnimations=(scrollingElements.forEach((e,t,n)=>e.style.zIndex=n.length-t),anime({targets:Array.from(scrollingElements),translateX:scrollingPath("x"),translateY:scrollingPath("y"),rotate:scrollingPath("angle"),loop:!1,autoplay:!1,elasticity:700,duration:1400,easing:"easeInOutQuad",delay:anime.stagger(130)})),getScrollPosition=e=>{var t=window["innerHeight"],{top:e,height:n}=e.getBoundingClientRect();return Math.max(0,Math.min((t/2-e)/n,1))},questionsElement=document.querySelector(".questions"),elements=[{block:document.querySelector(".gray-bg"),startColor:[255,255,255],endColor:[149,166,178]},{block:document.querySelector(".black-bg"),startColor:[149,166,178],endColor:[0,0,0],blur:!0},{block:document.querySelector(".third"),startColor:[0,0,0],endColor:[255,255,255]}];document.addEventListener("DOMContentLoaded",()=>{var e=document.querySelectorAll(".mens");const t=new IntersectionObserver((e,t)=>{e.forEach(e=>{e.isIntersecting?e.target.classList.add("blur"):e.target.classList.remove("blur")})},{rootMargin:"0px 0px 0px 0px",threshold:1}),n=(e.forEach(e=>t.observe(e)),()=>{elements.forEach(e=>{n=e.block,t=window.innerHeight,n=n.getBoundingClientRect().top;var t,n=100*Math.max(0,Math.min((t-n)/t,1));1<n&&(t=((e,t,n)=>{var[e,o,r]=e,[t,l,a]=t;return[e+Math.round((t-e)*n/100),o+Math.round((l-o)*n/100),r+Math.round((a-r)*n/100)]})(e.startColor,e.endColor,n),[e,n,t]=[...t],document.body.style.background=`rgb(${e}, ${n}, ${t})`)});var e=getScrollPosition(scrollingContainer);console.log(e);let t=e*planeAnimations.duration;t=Number(t.toFixed()),planeAnimations.seek(t),switchTextByScroll()});window.addEventListener("scroll",()=>{let e=!1;e||(window.requestAnimationFrame(function(){n(),e=!1}),e=!0)}),n(),window.addEventListener("resize",()=>{n()})});
+const scrollingContainer = document.querySelector('.intro');
+const scrollingPath = anime.path(".intro__path");
+const scrollingElements = document.querySelectorAll('.intro__scrolling');
+
+
+const header = document.querySelector('.header')
+
+// set zIndex
+scrollingElements.forEach((element, i, arr) => element.style.zIndex = arr.length - i)
+
+// init animation
+const planeAnimations = anime({
+    targets: Array.from(scrollingElements),
+    translateX: scrollingPath("x"),
+    translateY: scrollingPath("y"),
+    rotate: scrollingPath("angle"),
+    loop: false,
+    autoplay: false,
+    elasticity: 700,
+    duration: 1400,
+    easing: 'easeInOutQuad',
+    delay: anime.stagger(130)
+})
+
+// calc scroll position
+const getScrollPosition = (block) => {
+    const { innerHeight } = window;
+    const { top, height } = block.getBoundingClientRect();
+
+    let x = (innerHeight / 2 - top) / height;
+    let y = Math.max(0, Math.min(x, 1));
+
+    return y;
+};
+
+const questionsElement = document.querySelector('.questions');
+
+const elements = [
+  {
+      block: document.querySelector(".gray-bg"),
+      bgStartColor: [255, 255, 255],
+      bgEndColor: [149, 166, 178],
+  },
+  {
+      block: document.querySelector(".black-bg"),
+      bgStartColor: [149, 166, 178],
+      bgEndColor: [0, 0, 0]
+  },
+  {
+      block: document.querySelector(".third"),
+      bgStartColor: [0, 0, 0],
+      bgEndColor: [255, 255, 255],
+  }
+];
+
+const getScrollStep = (block) => {
+    const { innerHeight } = window;
+    const { top } = block.getBoundingClientRect();
+    const x = (innerHeight - top) / (innerHeight);
+    const y = Math.max(0, Math.min(x, 1));
+
+    return y * 100;
+};
+// background color interpolation
+const calcColor = (from, to, scroll) => {
+    const [fromR, fromG, fromB] = from;
+    const [toR, toG, toB] = to;
+
+    const r = fromR + Math.round(((toR - fromR) * scroll) / 100);
+    const g = fromG + Math.round(((toG - fromG) * scroll) / 100);
+    const b = fromB + Math.round(((toB - fromB) * scroll) / 100);
+    return [r, g, b];
+};
+
+// not used
+const setRootColor = (r, g, b) => {
+    document.body.style.setProperty('--main-bg-color', `rgb(${r}, ${g}, ${b})`)
+};
+
+
+
+const onScroll = () => {
+    // color bg
+    elements.forEach((element) => {
+        const position = getScrollStep(element.block);
+
+        if (position > 1) {
+            const colorSet = calcColor(element.bgStartColor, element.bgEndColor, position);
+            setRootColor(...colorSet);
+        }
+    });
+
+
+    // follow line
+    const roadElementPosition = getScrollPosition(scrollingContainer);
+    let seek = roadElementPosition * planeAnimations.duration;
+
+    seek = Number(seek.toFixed());
+    planeAnimations.seek(seek);
+};
+
+window.addEventListener("scroll", () => {
+    let ticking = false;
+    if (!ticking) {
+        window.requestAnimationFrame(function () {
+            onScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+onScroll();
+
+window.addEventListener('resize', () => {
+    onScroll()
+})
+
+
+
+// observer to switch header theme
+const switchHeaderContainers = document.querySelectorAll('.dark')
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+          header.classList.add('header--white')
+      } else {
+          header.classList.remove('header--white')
+      }
+    })
+  }, {
+    rootMargin: '0px 0px 75px 0px',
+    threshold: 0,
+})
+
+switchHeaderContainers.forEach((item) => observer.observe(item))

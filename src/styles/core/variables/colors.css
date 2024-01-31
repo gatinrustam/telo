@@ -1,34 +1,6 @@
-/* Переменные цветов */
-
 :root {
-  --ui-brand-main: #8D46F6;
-  --ui-brand-secondary: #7E40DA;
+  --main-text-color: #242424;
+  --main-bg-color: #ffffff;
 
-  --ui-text-main: #191816;
-  --ui-text-secondary: #7C8092;
-  --ui-text-substrate: #FFFFFF;
-
-  --ui-bg-main: #ffffff;
-  --ui-bg-secondary: #EFF0F5;
-  --ui-bg-surface: #E1E1E9;
-  --ui-bg-surface-secondary: #F4F5FA;
-  --ui-bg-icon: #1F222E; 
-
-  --ui-stroke-main: #D4D4DD;
-
-  --ui-status-success: #00856D;
-  --ui-status-warning: #E06800;
-  --ui-status-danger: #E10007;
-
-  --ui-colorful-beige: #F1EFE4;
-  --ui-colorful-success-secondary: #D9F2E3;
-  --ui-colorful-danger-secondary: #FEEDED;
-  --ui-colorful-warning-secondary: #FCE9D9;
-  --ui-colorful-violet: #E8E5F9;
-  --ui-colorful-dark: #1B1C1F;
-  --ui-colorful-success: #07AB8E;
-  --ui-colorful-danger: #F65121;
-  --ui-colorful-warning: #F68721;
-
-  --ui-substrate-modal: rgba(0, 0, 0, 0.5);
+  --black-bg-button: #242424;
 }
