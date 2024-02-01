@@ -38,8 +38,8 @@ setTimeout(function() {
       var details;
       var pos = new parallaxer.PositionCalculator(
         video,
-        ["bottom", 0.7],
-        ["top", 0.7]
+        ["bottom", 0.5],
+        ["top", 0.5]
       );
       this.shouldPlay = function(e) {
         var currentPosition = pos.getPosition(e.detail);

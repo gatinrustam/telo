@@ -4,22 +4,34 @@
 .double {
   padding-top: 20vh;
 
-  &__list {
-    width: 80%;
-    margin-bottom: 48px;
-    padding-left: 0;
+  &__slider {
+    margin-bottom: 24px;
+    margin-left: initial;
+    margin-right: initial;
+    
+    @include media(md) {
+      width: 80%;
+      margin-bottom: 36px;
+    }
   }
 
+  &__list {
+    padding-left: 0;
+    height: initial;
+  }
+  
   &__item {
-    list-style: none;
+    display: block;
+    height: 100%;
   }
 
   &__columns {
     display: flex;
-    gap: 24px;
+    gap: 54px;
     flex-direction: column;
     
     @include media(xl) {
+      gap: 24px;
       flex-direction: row;
     }
 
@@ -31,8 +43,11 @@
   }
 
   &__column {
-    flex: 1;
     position: relative;
+
+    @include media(xl) {
+      width: 50%;
+    }
   }
 
   &__content {
@@ -45,7 +60,7 @@
 
   &__sale {
     color: #ffffff;
-    font-size: 32px;
+    font-size: 24px;
     margin-top: -0.25em;
     background: linear-gradient(
       90deg, 
@@ -59,6 +74,10 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 1.5s linear infinite;
+
+    @include media(md) {
+      font-size: 32px;
+    }
 
     @keyframes shine {
       from {

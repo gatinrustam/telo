@@ -31,8 +31,14 @@
 
 .button-wrap {
   display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 24px;
+  flex-direction: column;
+  
+  @include media(md) {
+    gap: 24px;
+    flex-direction: row;
+  }
 }
 
 .button {
@@ -62,7 +68,8 @@
     color: #242424;
 
     &:hover {
-      background-color: #232323;
+      background-color: #c6cdd2;
+      color: #5c666e;
     }
   }
 }
@@ -77,4 +84,20 @@
       margin-bottom: 12px;
     }
   }
+}
+
+
+.swiper .swiper-pagination {
+  position: relative;
+  text-align: left;
+  margin-top: 24px;
+}
+
+.swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+}
+
+.swiper .swiper-pagination-bullet-active {
+  background-color: #ffffff;
 }

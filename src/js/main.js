@@ -44,11 +44,11 @@ const elements = [
   {
       block: document.querySelector(".black-bg"),
       bgStartColor: [149, 166, 178],
-      bgEndColor: [0, 0, 0]
+      bgEndColor: [36, 36, 36]
   },
   {
       block: document.querySelector(".third"),
-      bgStartColor: [0, 0, 0],
+      bgStartColor: [36, 36, 36],
       bgEndColor: [255, 255, 255],
   }
 ];
@@ -129,8 +129,27 @@ const observer = new IntersectionObserver((entries, observer) => {
       }
     })
   }, {
-    rootMargin: '0px 0px 75px 0px',
+    rootMargin: '0px 0px -50% 0px',
     threshold: 0,
 })
 
 switchHeaderContainers.forEach((item) => observer.observe(item))
+
+
+
+
+// swiper
+
+const swiper = new Swiper('.swiper', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    autoHeight: true,
+    autoplay: true,
+    delay: 3000,
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+});
